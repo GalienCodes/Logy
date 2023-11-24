@@ -1,0 +1,20 @@
+type BlogPost = record {
+  id : nat64;
+  title : text;
+  updated_at : opt nat64;
+  content : text;
+  created_at : nat64;
+  author : text;
+  tips_received : nat64;
+};
+type BlogPostPayload = record { title : text; content : text; author : text };
+type Error = variant { NotFound : record { msg : text } };
+type Result = variant { Ok : BlogPost; Err : Error };
+type Result_1 = variant { Ok; Err : Error };
+service : {
+  add_blog_post : (BlogPostPayload) -> (opt BlogPost);
+  delete_blog_post : (nat64) -> (Result);
+  get_blog_post : (nat64) -> (Result) query;
+  tip_blog_post : (nat64, nat64) -> (Result_1);
+  update_blog_post : (nat64, BlogPostPayload) -> (Result);
+}

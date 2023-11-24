@@ -1,4 +1,35 @@
-# icp_rust_message_board_contract
+## Logy
+![Add_blog_post](https://i.ibb.co/28VrHph/Screenshot-from-2023-11-24-19-22-57.png)
+
+# Description
+ A simplified example of a Rust code for an Internet Computer (ICP) canister to manage blog posts, including a function to tip the creator or writer.
+
+ ## Technologies Used
+ - Rust
+
+![delete_blog_post](https://i.ibb.co/6NMqLpf/Screenshot-from-2023-11-24-19-46-59.png)
+![get_blog_post](https://i.ibb.co/w0y0PmZ/Screenshot-from-2023-11-24-19-46-08.png)
+![Tip_blog_post](https://i.ibb.co/yh0q10j/Screenshot-from-2023-11-24-19-25-15.png)
+![Update](https://i.ibb.co/j4QwX09/Screenshot-from-2023-11-24-19-27-42.png)
+
+## How it works!
+
+1. **Add a post**
+![Add_blog_post](https://i.ibb.co/28VrHph/Screenshot-from-2023-11-24-19-22-57.png)
+
+2. **Get blog post**
+![get_blog_post](https://i.ibb.co/w0y0PmZ/Screenshot-from-2023-11-24-19-46-08.png)
+
+3. **Update Post**
+![Update](https://i.ibb.co/j4QwX09/Screenshot-from-2023-11-24-19-27-42.png)
+
+4. **Tip blog post**
+![Tip_blog_post](https://i.ibb.co/yh0q10j/Screenshot-from-2023-11-24-19-25-15.png)
+
+5. **Delete blog post**
+![delete_blog_post](https://i.ibb.co/6NMqLpf/Screenshot-from-2023-11-24-19-46-59.png)
+
+## icp_Logy_contract
 
 ### Requirements
 * rustc 1.64 or higher

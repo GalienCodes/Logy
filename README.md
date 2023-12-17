@@ -2,32 +2,19 @@
 ![Add_blog_post](https://i.ibb.co/28VrHph/Screenshot-from-2023-11-24-19-22-57.png)
 
 # Description
- A simplified example of a Rust code for an Internet Computer (ICP) canister to manage blog posts, including a function to tip the creator or writer.
+## Supply Chain Management Canister
+ 
+ This Rust-based Internet Computer (IC) canister provides a basic supply chain management system.
+ It includes functionality for managing farmers, products, wholesalers, and supply orders.
+ Each entity **(farmer, product, wholesaler, supply order)** has associated CRUD operations.
+ 
+ The canister utilizes the IC stable structures for memory management and BoundedStorable trait to define the maximum size of stored entities. It leverages thread-local storage for efficient and thread-safe management of memory, IDs, and storage structures.
+
+ The canister defines various data structures for entities such as Farmer, Product, Wholesaler, and SupplyOrder, each implementing serialization and deserialization traits for storage purposes.
 
  ## Technologies Used
  - Rust
 
-![delete_blog_post](https://i.ibb.co/6NMqLpf/Screenshot-from-2023-11-24-19-46-59.png)
-![get_blog_post](https://i.ibb.co/w0y0PmZ/Screenshot-from-2023-11-24-19-46-08.png)
-![Tip_blog_post](https://i.ibb.co/yh0q10j/Screenshot-from-2023-11-24-19-25-15.png)
-![Update](https://i.ibb.co/j4QwX09/Screenshot-from-2023-11-24-19-27-42.png)
-
-## How it works!
-
-1. **Add a post**
-![Add_blog_post](https://i.ibb.co/28VrHph/Screenshot-from-2023-11-24-19-22-57.png)
-
-2. **Get blog post**
-![get_blog_post](https://i.ibb.co/w0y0PmZ/Screenshot-from-2023-11-24-19-46-08.png)
-
-3. **Update Post**
-![Update](https://i.ibb.co/j4QwX09/Screenshot-from-2023-11-24-19-27-42.png)
-
-4. **Tip blog post**
-![Tip_blog_post](https://i.ibb.co/yh0q10j/Screenshot-from-2023-11-24-19-25-15.png)
-
-5. **Delete blog post**
-![delete_blog_post](https://i.ibb.co/6NMqLpf/Screenshot-from-2023-11-24-19-46-59.png)
 
 ## icp_Logy_contract
 
@@ -114,3 +101,29 @@ $ dfx start --background
 # Deploys your canisters to the replica and generates your candid interface
 $ dfx deploy
 ```
+
+**Main Functions**
+
+- **add_farmer(payload: FarmerPayload) -> Option<Farmer>**
+  Creates a new farmer based on the provided payload and adds it to the farmer storage. Returns the created farmer if successful.
+
+- **add_product(payload: ProductPayload) -> Option<Product>**
+  Creates a new product based on the provided payload and adds it to the product storage. Returns the created product if successful.
+
+- **add_wholesaler(payload: WholesalerPayload) -> Option<Wholesaler>**
+  Creates a new wholesaler based on the provided payload and adds it to the wholesaler storage. Returns the created wholesaler if successful.
+
+- **add_supply_order(payload: SupplyOrderPayload) -> Option<SupplyOrder>**
+  Creates a new supply order based on the provided payload and adds it to the supply order storage. Returns the created supply order if successful.
+
+- **add_supply_order_wholesaler(payload: AddSupplyOrderWholesalerPayload) -> Result<SupplyOrder, Error>**
+  Associates a wholesaler with an existing supply order identified by the given order ID. Returns the updated supply order if successful, otherwise returns a NotFound error if the supply order is not found.
+
+- **complete_supply_order(id: u64) -> Result<SupplyOrder, Error>**
+  Marks a supply order as complete based on the provided ID. Returns the completed supply order if successful, otherwise returns a NotFound error if the supply order is not found.
+
+- **update_supply_order(id: u64, payload: SupplyOrderPayload) -> Option<SupplyOrder>**
+  Updates the information of an existing supply order identified by the given ID with the provided payload. Returns the updated supply order if successful.
+
+- **delete_supply_order(id: u64) -> Result<SupplyOrder, Error>**
+  Deletes a supply order based on the provided ID. Returns the deleted supply order if successful, otherwise returns a NotFound error if the supply order is not found.

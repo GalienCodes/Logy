@@ -1,20 +1,83 @@
-type BlogPost = record {
+type AddSupplyOrderWholesalerPayload = record {
+  wholesaler_id : nat64;
+  order_id : nat64;
+};
+type Error = variant {
+  NotFound : record { msg : text };
+  SupplyOrderNotFound : record { msg : text };
+};
+type Farmer = record {
   id : nat64;
+  updated_at : opt nat64;
+  name : text;
+  created_at : nat64;
+  email : text;
+  product_ids : vec nat64;
+  phone : text;
+};
+type FarmerPayload = record { name : text; email : text; phone : text };
+type Product = record {
+  id : nat64;
+  updated_at : opt nat64;
+  farmer_id : nat64;
+  name : text;
+  description : text;
+  created_at : nat64;
+};
+type ProductPayload = record {
+  farmer_id : nat64;
+  name : text;
+  description : text;
+};
+type Result = variant { Ok : Farmer; Err : Error };
+type Result_1 = variant { Ok : Product; Err : Error };
+type Result_2 = variant { Ok : SupplyOrder; Err : Error };
+type Result_3 = variant { Ok : Wholesaler; Err : Error };
+type Result_4 = variant { Ok : vec SupplyOrder; Err : Error };
+type Result_5 = variant { Ok : vec Wholesaler; Err : Error };
+type SupplyOrder = record {
+  id : nat64;
+  is_complete : bool;
   title : text;
   updated_at : opt nat64;
-  content : text;
+  product_types : vec text;
+  farmer_id : nat64;
   created_at : nat64;
-  author : text;
-  tips_received : nat64;
+  wholesaler_id : opt nat64;
+  products : vec record { text; nat64 };
 };
-type BlogPostPayload = record { title : text; content : text; author : text };
-type Error = variant { NotFound : record { msg : text } };
-type Result = variant { Ok : BlogPost; Err : Error };
-type Result_1 = variant { Ok; Err : Error };
+type SupplyOrderPayload = record {
+  is_complete : bool;
+  title : text;
+  product_types : vec text;
+  farmer_id : nat64;
+  wholesaler_id : nat64;
+  products : vec record { text; nat64 };
+};
+type Wholesaler = record {
+  id : nat64;
+  updated_at : opt nat64;
+  name : text;
+  created_at : nat64;
+  email : text;
+  order_ids : vec nat64;
+  phone : text;
+};
 service : {
-  add_blog_post : (BlogPostPayload) -> (opt BlogPost);
-  delete_blog_post : (nat64) -> (Result);
-  get_blog_post : (nat64) -> (Result) query;
-  tip_blog_post : (nat64, nat64) -> (Result_1);
-  update_blog_post : (nat64, BlogPostPayload) -> (Result);
+  add_farmer : (FarmerPayload) -> (Result);
+  add_product : (ProductPayload) -> (Result_1);
+  add_supply_order : (SupplyOrderPayload) -> (opt SupplyOrder);
+  add_supply_order_wholesaler : (AddSupplyOrderWholesalerPayload) -> (Result_2);
+  add_wholesaler : (FarmerPayload) -> (Result_3);
+  complete_supply_order : (nat64) -> (Result_2);
+  delete_supply_order : (nat64) -> (Result_2);
+  get_farmer : (nat64) -> (Result) query;
+  get_incomplete_supply_orders : () -> (Result_4) query;
+  get_product : (nat64) -> (Result_1) query;
+  get_supply_order : (nat64) -> (Result_2) query;
+  get_supply_orders : () -> (Result_4) query;
+  get_wholesaler : (nat64) -> (Result_3) query;
+  get_wholesaler_orders : (nat64) -> (Result_4) query;
+  get_wholesalers : () -> (Result_5) query;
+  update_supply_order : (nat64, SupplyOrderPayload) -> (opt SupplyOrder);
 }

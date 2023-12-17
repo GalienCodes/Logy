@@ -1,6 +1,4 @@
 ## Logy
-![Add_blog_post](https://i.ibb.co/28VrHph/Screenshot-from-2023-11-24-19-22-57.png)
-
 # Description
 ## Supply Chain Management Canister
  
